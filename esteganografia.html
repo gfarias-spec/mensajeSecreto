@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 2 · Esteganografía — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="../index.html">Inicio</a>
+      <a href="../presentacion.html">Presentación</a>
+      <a href="criptografia.html">1 · Criptografía</a>
+      <a href="esteganografia.html" class="active">2 · Esteganografía</a>
+      <a href="hashes.html">3 · Hashes</a>
+      <a href="desafio-final.html">Desafío final</a>
+      <a href="../evaluacion.html">Evaluación</a>
+      <a href="../recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Etapa 2 de 3</p>
+    <h1>🖼️ Esteganografía: que nadie note que existe</h1>
+
+    <blockquote class="question">
+      Si el mensaje ya está cifrado, ¿todos saben igual que estamos enviando algo secreto?
+    </blockquote>
+    <blockquote class="question">
+      ¿Qué pasaría si, además de cifrarlo, pudiéramos ocultar que el mensaje existe?
+    </blockquote>
+
+    <p class="lead">
+      Un archivo lleno de texto cifrado sin sentido llama la atención: cualquiera que lo vea sabe que
+      ahí hay algo escondido, aunque no pueda leerlo. La <strong>esteganografía</strong> resuelve otro
+      problema distinto al de la criptografía: no se trata de que no puedan leer el mensaje, sino de que
+      <strong>ni siquiera sepan que existe</strong>. La palabra viene del griego <em>steganos</em>
+      ("cubierto") y <em>graphein</em> ("escritura").
+    </p>
+
+    <div class="callout">
+      <strong>No es solo digital:</strong> esconder mensajes es una práctica antigua — tinta invisible,
+      micropuntos, mensajes tatuados bajo el cabello. Hoy se puede ocultar información dentro de imágenes,
+      audios o videos, modificando datos que el ojo (o el oído) humano casi no puede percibir.
+    </div>
+
+    <h2>Cómo funciona en una imagen digital</h2>
+    <p>
+      Cada píxel de una imagen se guarda como tres números (rojo, verde, azul), del 0 al 255. Cambiar el
+      <strong>último bit</strong> de uno de esos números (el "bit menos significativo" o LSB) modifica el
+      color en, como mucho, 1 unidad sobre 255 — un cambio invisible al ojo humano. Esta herramienta
+      guarda tu mensaje secreto ahí: un bit por cada canal de color de cada píxel.
+    </p>
+
+    <div class="tool">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ocultar">Ocultar mensaje</button>
+        <button class="tab-btn" data-tab="revelar">Revelar mensaje</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-ocultar">
+        <label>Imagen base</label>
+        <div class="btn-row">
+          <button class="btn secondary" onclick="generarImagenMuestra()">Generar imagen de muestra</button>
+          <label class="btn secondary" style="cursor:pointer;">
+            Subir mi imagen
+            <input type="file" accept="image/*" onchange="cargarImagenOcultar(event)" style="display:none;">
+          </label>
+        </div>
+        <canvas id="canvas-ocultar" width="360" height="220"></canvas>
+
+        <label for="msg-ocultar">Mensaje secreto a ocultar (usá el que cifraste en la Etapa 1, o cualquier texto)</label>
+        <textarea id="msg-ocultar" rows="2" placeholder="Pegá acá tu mensaje cifrado...">WHUFHU RMR DELHUWR</textarea>
+
+        <div class="btn-row">
+          <button class="btn" onclick="ocultarMensaje()">Ocultar mensaje en la imagen</button>
+          <button class="btn secondary" onclick="descargarImagen()">Descargar imagen resultante</button>
+        </div>
+        <p class="hint" id="ocultar-estado"></p>
+
+        <div class="callout">
+          <strong>El mensaje ya no se ve a simple vista — y eso está bien, es lo que buscamos.</strong>
+          No hay nada para "descargar como texto": el mensaje vive escondido dentro de los píxeles de
+          la imagen. Para comprobar que realmente quedó ahí, probá revelarlo:
+          <div class="btn-row">
+            <button class="btn" onclick="probarRevelado()">Probar que funcionó: revelar este mensaje →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-revelar">
+        <label>Imagen a analizar</label>
+        <div class="btn-row">
+          <button class="btn secondary" onclick="usarUltimaGenerada()">Usar la imagen que acabo de crear</button>
+          <label class="btn secondary" style="cursor:pointer;">
+            Subir una imagen para revisar
+            <input type="file" accept="image/*" onchange="cargarImagenRevelar(event)" style="display:none;">
+          </label>
+        </div>
+        <canvas id="canvas-revelar" width="360" height="220"></canvas>
+
+        <div class="btn-row">
+          <button class="btn" onclick="revelarMensaje()">Revelar mensaje oculto</button>
+        </div>
+        <label>Mensaje encontrado</label>
+        <div class="output-box" id="mensaje-revelado">—</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Alternativa sin computadora:</strong> si no hay dispositivos suficientes, un equipo puede
+      ocultar el mensaje escribiendo un texto "de cobertura" donde solo la primera letra de cada palabra
+      (o de cada línea) forma el mensaje real. El otro equipo debe descubrir la regla de lectura antes
+      de poder leerlo.
+    </div>
+
+    <h2>Para llevar a la Etapa 3</h2>
+    <p>
+      Ya lograron que el mensaje sea ilegible (criptografía) y que pase desapercibido (esteganografía).
+      Falta un problema más: ¿cómo sabe el equipo que lo recibe que la imagen no fue tocada en el camino,
+      ni por error ni a propósito? Eso lo resuelven las <strong>funciones hash</strong>.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="criptografia.html">← Etapa 1: Criptografía</a>
+      <a class="btn" href="hashes.html">Ir a Etapa 3: Funciones hash →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="../licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+const canvasOcultar = document.getElementById('canvas-ocultar');
+const canvasRevelar = document.getElementById('canvas-revelar');
+
+function generarImagenMuestra(){
+  const ctx = canvasOcultar.getContext('2d');
+  const w = canvasOcultar.width, h = canvasOcultar.height;
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, '#123');
+  grad.addColorStop(0.5, '#1a6f63');
+  grad.addColorStop(1, '#f0b429');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  for (let i = 0; i < 14; i++){
+    ctx.beginPath();
+    ctx.arc(Math.random()*w, Math.random()*h, Math.random()*30 + 5, 0, Math.PI*2);
+    ctx.fill();
+  }
+  document.getElementById('ocultar-estado').textContent = 'Imagen de muestra generada.';
+}
+
+function drawImageToCanvas(img, canvas){
+  const maxW = 480;
+  let w = img.width, h = img.height;
+  if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, w, h);
+}
+
+function cargarImagenOcultar(evt){
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      drawImageToCanvas(img, canvasOcultar);
+      document.getElementById('ocultar-estado').textContent = 'Imagen propia cargada.';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function cargarImagenRevelar(evt){
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => drawImageToCanvas(img, canvasRevelar);
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function usarUltimaGenerada(){
+  canvasRevelar.width = canvasOcultar.width;
+  canvasRevelar.height = canvasOcultar.height;
+  canvasRevelar.getContext('2d').drawImage(canvasOcultar, 0, 0);
+}
+
+function probarRevelado(){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="revelar"]').classList.add('active');
+  document.getElementById('tab-revelar').classList.add('active');
+  usarUltimaGenerada();
+  revelarMensaje();
+  document.getElementById('tab-revelar').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function bitPosToIndex(n){
+  const pixel = Math.floor(n / 3);
+  const channel = n % 3;
+  return pixel * 4 + channel;
+}
+
+function ocultarMensaje(){
+  const ctx = canvasOcultar.getContext('2d');
+  const imgData = ctx.getImageData(0, 0, canvasOcultar.width, canvasOcultar.height);
+  const data = imgData.data;
+  const mensaje = document.getElementById('msg-ocultar').value;
+  const msgBytes = new TextEncoder().encode(mensaje);
+
+  const capacityBits = Math.floor(data.length / 4) * 3;
+  const totalBits = (4 + msgBytes.length) * 8;
+  if (totalBits > capacityBits) {
+    document.getElementById('ocultar-estado').textContent = 'El mensaje es demasiado largo para esta imagen. Probá con una imagen más grande o un mensaje más corto.';
+    return;
+  }
+
+  const allBytes = new Uint8Array(4 + msgBytes.length);
+  const lenView = new DataView(allBytes.buffer);
+  lenView.setUint32(0, msgBytes.length, false);
+  allBytes.set(msgBytes, 4);
+
+  for (let n = 0; n < totalBits; n++){
+    const byteIndex = n >> 3;
+    const bitInByte = n & 7;
+    const bit = (allBytes[byteIndex] >> (7 - bitInByte)) & 1;
+    const idx = bitPosToIndex(n);
+    data[idx] = (data[idx] & 0xFE) | bit;
+  }
+  ctx.putImageData(imgData, 0, 0);
+  document.getElementById('ocultar-estado').textContent = 'Mensaje oculto en la imagen (' + msgBytes.length + ' bytes). Visualmente no notarás diferencia.';
+}
+
+function descargarImagen(){
+  const link = document.createElement('a');
+  link.download = 'mensaje-secreto.png';
+  link.href = canvasOcultar.toDataURL('image/png');
+  link.click();
+}
+
+function revelarMensaje(){
+  const ctx = canvasRevelar.getContext('2d');
+  if (canvasRevelar.width === 0){
+    document.getElementById('mensaje-revelado').textContent = '(primero cargá una imagen)';
+    return;
+  }
+  const imgData = ctx.getImageData(0, 0, canvasRevelar.width, canvasRevelar.height);
+  const data = imgData.data;
+
+  let length = 0;
+  for (let n = 0; n < 32; n++){
+    const idx = bitPosToIndex(n);
+    length = (length * 2) + (data[idx] & 1);
+  }
+
+  const capacityBits = Math.floor(data.length / 4) * 3;
+  if (length <= 0 || length * 8 + 32 > capacityBits || length > 100000){
+    document.getElementById('mensaje-revelado').textContent = '(no se detectó un mensaje válido en esta imagen)';
+    return;
+  }
+
+  const bytes = new Uint8Array(length);
+  for (let n = 0; n < length * 8; n++){
+    const idx = bitPosToIndex(32 + n);
+    const bit = data[idx] & 1;
+    const byteIndex = n >> 3;
+    const bitInByte = n & 7;
+    bytes[byteIndex] |= (bit << (7 - bitInByte));
+  }
+  try {
+    document.getElementById('mensaje-revelado').textContent = new TextDecoder('utf-8', {fatal:true}).decode(bytes);
+  } catch (e) {
+    document.getElementById('mensaje-revelado').textContent = '(no se detectó un mensaje válido en esta imagen)';
+  }
+}
+
+generarImagenMuestra();
+</script>
+</body>
+</html>

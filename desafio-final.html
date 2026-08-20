@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desafío final — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="../index.html">Inicio</a>
+      <a href="../presentacion.html">Presentación</a>
+      <a href="criptografia.html">1 · Criptografía</a>
+      <a href="esteganografia.html">2 · Esteganografía</a>
+      <a href="hashes.html">3 · Hashes</a>
+      <a href="desafio-final.html" class="active">Desafío final</a>
+      <a href="../evaluacion.html">Evaluación</a>
+      <a href="../recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Desafío integrador</p>
+    <h1>🎯 Desafío final: la misión completa</h1>
+
+    <p class="lead">
+      Formen dos equipos (Equipo emisor y Equipo receptor). Antes de empezar, <strong>en persona y sin que
+      nadie más escuche</strong>, acuerden una clave secreta compartida (por ejemplo, una palabra para el
+      cifrado César o XOR). Esa clave nunca viaja por la imagen ni por el hash — solo la conocen ustedes.
+    </p>
+
+    <div class="callout">
+      <strong>Por qué se hace así:</strong> así funciona el cifrado de extremo a extremo en apps como
+      WhatsApp: la clave se acuerda de antemano entre los dos dispositivos, nunca viaja "en claro" junto
+      con los mensajes.
+    </div>
+
+    <p class="hint">Sugerencia: abran las tres herramientas (Criptografía, Esteganografía, Hashes) en pestañas
+    distintas del navegador para ir y venir entre ellas durante el desafío.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🔵 Equipo emisor — pasos</h3>
+        <ol>
+          <li>Escriban un mensaje corto para el otro equipo.</li>
+          <li>En <a href="criptografia.html">Criptografía</a>, cifren el mensaje con la clave acordada
+          (César o XOR).</li>
+          <li>En <a href="esteganografia.html">Esteganografía</a>, oculten el texto cifrado dentro de una
+          imagen y descárguenla.</li>
+          <li>En <a href="hashes.html">Hashes</a>, calculen el hash SHA-256 del mensaje <strong>original,
+          sin cifrar</strong>.</li>
+          <li>Entreguen al Equipo receptor: la imagen descargada + el hash calculado. <strong>No</strong>
+          les den la clave por escrito.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🟢 Equipo receptor — pasos</h3>
+        <ol>
+          <li>En <a href="esteganografia.html">Esteganografía</a> → "Revelar mensaje", suban la imagen
+          recibida y extraigan el texto cifrado.</li>
+          <li>En <a href="criptografia.html">Criptografía</a>, descifren ese texto usando la clave que
+          acordaron con el otro equipo.</li>
+          <li>En <a href="hashes.html">Hashes</a>, calculen el hash del mensaje ya descifrado.</li>
+          <li>Comparen ese hash con el que les entregó el Equipo emisor. ¿Coinciden?</li>
+          <li>Si coinciden: la misión fue un éxito, el mensaje llegó intacto. Si no coinciden: algo se
+          modificó en el camino (o alguien cometió un error de tipeo) — revisen juntos qué pasó.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Variante "espía":</strong> si el grupo es grande, un tercer equipo puede intentar interceptar
+      la imagen entre el emisor y el receptor: pueden ver la imagen, pero no la clave. ¿Logran encontrar el
+      mensaje cifrado dentro de la imagen (Etapa 2)? ¿Logran descifrarlo sin la clave (Etapa 1)?
+    </div>
+
+    <h2>Reflexión final en equipo</h2>
+    <p>Conversen y anoten sus respuestas antes de pasar a la evaluación:</p>
+    <blockquote class="question">¿Por qué en la vida real no se usa una sola de estas tres técnicas para proteger la información?</blockquote>
+    <blockquote class="question">¿En qué situaciones conviene cifrar, ocultar o verificar la integridad de un archivo? ¿Alcanza siempre con una sola?</blockquote>
+    <blockquote class="question">¿Qué aplicaciones que usan todos los días creen que utilizan alguna de estas tres técnicas?</blockquote>
+
+    <div class="callout">
+      Hoy ustedes usaron versiones simplificadas de técnicas que están presentes todos los días cuando
+      mandan un mensaje por WhatsApp, hacen una compra por Internet, descargan un archivo o acceden a
+      un servicio digital.
+    </div>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="hashes.html">← Etapa 3: Hashes</a>
+      <a class="btn" href="../evaluacion.html">Ir a la evaluación →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="../licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

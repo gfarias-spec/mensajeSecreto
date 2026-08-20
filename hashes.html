@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 3 · Funciones hash — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="../index.html">Inicio</a>
+      <a href="../presentacion.html">Presentación</a>
+      <a href="criptografia.html">1 · Criptografía</a>
+      <a href="esteganografia.html">2 · Esteganografía</a>
+      <a href="hashes.html" class="active">3 · Hashes</a>
+      <a href="desafio-final.html">Desafío final</a>
+      <a href="../evaluacion.html">Evaluación</a>
+      <a href="../recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Etapa 3 de 3</p>
+    <h1>🧬 Funciones hash: comprobar que no fue modificado</h1>
+
+    <blockquote class="question">
+      Descargaste un mod para Minecraft. ¿Cómo sabés que realmente lo hizo quien dice haberlo hecho,
+      y que nadie lo modificó en el camino para meterle un virus?
+    </blockquote>
+    <blockquote class="question">
+      Encontraste un hack para tu juego favorito. ¿Cómo podrías saber si el archivo fue alterado
+      antes de instalarlo?
+    </blockquote>
+
+    <p class="lead">
+      Ni la criptografía ni la esteganografía resuelven este problema: cifrar oculta el contenido,
+      ocultar oculta la existencia, pero ninguna de las dos te dice si el archivo que tenés en tus
+      manos es <em>exactamente</em> igual al que se envió. Para eso existen las
+      <strong>funciones hash</strong>.
+    </p>
+
+    <h2>¿Qué es una función hash?</h2>
+    <p>Una función hash toma cualquier entrada (una palabra, un párrafo, una foto, un instalador entero)
+    y produce una salida de <strong>tamaño fijo</strong> — una especie de huella digital del contenido.
+    Tiene tres propiedades clave:</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Determinística</h3>
+        <p>La misma entrada siempre produce exactamente el mismo hash.</p>
+      </div>
+      <div class="card">
+        <h3>Unidireccional</h3>
+        <p>No existe forma de "deshacer" un hash para recuperar el contenido original — no es cifrado.</p>
+      </div>
+      <div class="card">
+        <h3>Efecto avalancha</h3>
+        <p>Cambiar un solo carácter de la entrada produce un hash completamente distinto.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <h3>Herramienta: calculadora de hash (SHA-256)</h3>
+      <p class="hint">SHA-256 es el algoritmo que usan, entre otros, Bitcoin, Git y la verificación de descargas de software.</p>
+      <label for="hash-texto">Texto o mensaje</label>
+      <textarea id="hash-texto" rows="2" placeholder="Escribí algo...">MisionMensajeSecreto</textarea>
+      <div class="btn-row">
+        <button class="btn" onclick="calcularHashSimple()">Calcular hash SHA-256</button>
+      </div>
+      <label>Hash resultante</label>
+      <div class="output-box" id="hash-simple-resultado">—</div>
+    </div>
+
+    <div class="tool">
+      <h3>Efecto avalancha: comparar dos versiones</h3>
+      <p>Escribí (casi) el mismo texto en ambos campos — cambiá una sola letra — y compará los hashes.</p>
+      <div class="compare">
+        <div>
+          <label for="hash-a">Versión A</label>
+          <textarea id="hash-a" rows="2">Nos encontramos a las 15hs</textarea>
+          <div class="output-box" id="hash-a-out">—</div>
+        </div>
+        <div>
+          <label for="hash-b">Versión B</label>
+          <textarea id="hash-b" rows="2">Nos encontramos a las 16hs</textarea>
+          <div class="output-box" id="hash-b-out">—</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="compararHashes()">Calcular y comparar</button>
+      </div>
+      <p id="compare-resultado" class="hint"></p>
+    </div>
+
+    <div class="tool">
+      <h3>Reto: verificación de integridad</h3>
+      <p>
+        El equipo emisor publicó este mensaje junto con su hash oficial. El mensaje pasó por varias manos
+        en el camino. Pegalo en el casillero, calculá su hash y compará con el oficial: ¿llegó intacto?
+      </p>
+      <label>Hash oficial publicado por el emisor</label>
+      <div class="output-box">b7f5b1a63e2b1a3c9d0e4f6a8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d</div>
+      <label for="hash-recibido">Mensaje recibido (pegalo tal cual llegó)</label>
+      <textarea id="hash-recibido" rows="2">MISION CONFIRMADA equipo azul 15:00</textarea>
+      <div class="btn-row">
+        <button class="btn" onclick="verificarIntegridad()">Verificar integridad</button>
+      </div>
+      <p id="verificacion-resultado" class="hint"></p>
+      <p class="small">
+        <em>Nota para el equipo docente:</em> el hash oficial de este ejemplo no corresponde al texto
+        mostrado a propósito — la actividad busca que el grupo detecte la alteración. Pueden reemplazar
+        ambos valores por un ejemplo propio calculado con la calculadora de arriba.
+      </p>
+    </div>
+
+    <div class="callout warn">
+      <strong>Hash no es cifrado:</strong> un archivo cifrado se puede descifrar con la clave correcta.
+      Un hash nunca se "deshace": solo sirve para comparar. Por eso las apps y sitios web no guardan tu
+      contraseña tal cual la escribís — guardan su hash, y comparan hashes cuando iniciás sesión.
+    </div>
+
+    <h2>Cerrando la misión</h2>
+    <p>Ya tienen las tres piezas: un mensaje cifrado, oculto en una imagen, y una forma de comprobar que
+    no fue alterado. Es hora de ponerlas todas juntas.</p>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="esteganografia.html">← Etapa 2: Esteganografía</a>
+      <a class="btn" href="desafio-final.html">Ir al Desafío final →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="../licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+async function sha256(texto){
+  if (!window.crypto || !window.crypto.subtle){
+    return '(esta herramienta necesita ejecutarse con HTTPS; al publicar el sitio en GitHub Pages funciona automáticamente)';
+  }
+  const enc = new TextEncoder().encode(texto);
+  const buffer = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function calcularHashSimple(){
+  const texto = document.getElementById('hash-texto').value;
+  document.getElementById('hash-simple-resultado').textContent = await sha256(texto);
+}
+
+async function compararHashes(){
+  const a = document.getElementById('hash-a').value;
+  const b = document.getElementById('hash-b').value;
+  const hashA = await sha256(a);
+  const hashB = await sha256(b);
+  document.getElementById('hash-a-out').textContent = hashA;
+  document.getElementById('hash-b-out').textContent = hashB;
+  const resultado = document.getElementById('compare-resultado');
+  if (a === b) {
+    resultado.innerHTML = '<span class="status-ok">Los textos son idénticos → los hashes coinciden.</span>';
+  } else if (hashA === hashB) {
+    resultado.innerHTML = '<span class="status-bad">Raro: textos distintos con el mismo hash (no debería pasar con SHA-256).</span>';
+  } else {
+    resultado.innerHTML = '<span class="status-bad">Los hashes son completamente distintos, aunque el texto casi no cambió: eso es el efecto avalancha.</span>';
+  }
+}
+
+async function verificarIntegridad(){
+  const oficial = 'b7f5b1a63e2b1a3c9d0e4f6a8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d';
+  const recibido = document.getElementById('hash-recibido').value;
+  const hashRecibido = await sha256(recibido);
+  const resultado = document.getElementById('verificacion-resultado');
+  if (hashRecibido === oficial) {
+    resultado.innerHTML = '<span class="status-ok">✔ El hash coincide: el mensaje llegó intacto.</span>';
+  } else {
+    resultado.innerHTML = '<span class="status-bad">✘ El hash NO coincide (' + hashRecibido.slice(0,16) + '…): el mensaje fue alterado en el camino, o el hash oficial no corresponde a este texto.</span>';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 1 · Criptografía — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="../index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="../index.html">Inicio</a>
+      <a href="../presentacion.html">Presentación</a>
+      <a href="criptografia.html" class="active">1 · Criptografía</a>
+      <a href="esteganografia.html">2 · Esteganografía</a>
+      <a href="hashes.html">3 · Hashes</a>
+      <a href="desafio-final.html">Desafío final</a>
+      <a href="../evaluacion.html">Evaluación</a>
+      <a href="../recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Etapa 1 de 3</p>
+    <h1>🔐 Criptografía: que nadie pueda leerlo</h1>
+
+    <blockquote class="question">
+      ¿Cómo hacemos para que nadie pueda leer nuestro mensaje si alguien lo intercepta en el camino?
+    </blockquote>
+    <blockquote class="question">
+      ¿Alcanza con ponerle una contraseña a un archivo?
+    </blockquote>
+
+    <p class="lead">
+      Ponerle una contraseña a un archivo (como un PDF o un ZIP) solo controla <em>quién puede abrirlo</em>:
+      si alguien rompe o evita esa contraseña, el contenido de adentro sigue siendo texto normal, legible.
+      <strong>Cifrar</strong> es distinto: es transformar el mensaje mismo, letra por letra o byte por byte,
+      usando una regla y una <strong>clave</strong>, de modo que sin la clave el resultado parezca basura,
+      aunque alguien tenga acceso total al archivo.
+    </p>
+
+    <div class="callout">
+      <strong>Idea clave:</strong> en el <em>cifrado simétrico</em>, la misma clave que se usa para cifrar
+      sirve para descifrar. Es la técnica que usan apps como WhatsApp: antes de chatear, tu celular y el de
+      la otra persona acuerdan una clave secreta que nadie más conoce — ni siquiera WhatsApp.
+    </div>
+
+    <h2>Herramienta: cifrar y descifrar</h2>
+    <div class="tool">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="cesar">Cifrado César</button>
+        <button class="tab-btn" data-tab="xor">Cifrado XOR</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-cesar">
+        <p>El cifrado César desplaza cada letra del alfabeto un número fijo de posiciones (la <em>clave</em>).
+        Por ejemplo, con desplazamiento 3: la A se convierte en D, la B en E, y así.</p>
+        <p class="hint">Solo se cifran las letras A-Z (sin acentos ni Ñ, para simplificar). Los espacios y signos no cambian.</p>
+
+        <label for="cesar-texto">Mensaje</label>
+        <textarea id="cesar-texto" rows="3" placeholder="Escribí tu mensaje aquí...">MISION EN MARCHA</textarea>
+
+        <label for="cesar-shift">Clave (desplazamiento): <span id="cesar-shift-val">3</span></label>
+        <input type="range" id="cesar-shift" min="1" max="25" value="3">
+
+        <div class="btn-row">
+          <button class="btn" onclick="cesarCifrar()">Cifrar</button>
+          <button class="btn secondary" onclick="cesarDescifrar()">Descifrar (con esta clave)</button>
+        </div>
+
+        <label>Resultado</label>
+        <div class="output-box" id="cesar-resultado">—</div>
+
+        <h3>Reto: romper un mensaje cifrado sin la clave</h3>
+        <p>Este mensaje fue cifrado con César, pero no te dijeron la clave. Probá "fuerza bruta": como
+        solo hay 25 claves posibles, el sistema las prueba todas.</p>
+        <div class="output-box" id="cesar-reto">WHUFHU RMR DELHUWR</div>
+        <div class="btn-row">
+          <button class="btn" onclick="fuerzaBruta()">Probar las 25 claves</button>
+        </div>
+        <div class="output-box" id="cesar-bruta" style="display:none;"></div>
+        <div class="callout warn">
+          <strong>Por qué esto importa:</strong> el César es fácil de romper porque tiene muy pocas claves
+          posibles (25). La criptografía real (como AES, que usan los bancos y WhatsApp) usa claves con
+          <strong>miles de billones de combinaciones</strong> — probarlas todas por fuerza bruta llevaría
+          más tiempo que la edad del universo con la tecnología actual.
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-xor">
+        <p>El cifrado XOR combina cada carácter del mensaje con una clave, usando la operación lógica
+        "o exclusivo" (XOR) bit a bit. Lo interesante de XOR: aplicarlo dos veces con la misma clave
+        devuelve el mensaje original — es la misma operación para cifrar y para descifrar.</p>
+
+        <label for="xor-texto">Mensaje (texto plano)</label>
+        <textarea id="xor-texto" rows="2" placeholder="Escribí tu mensaje...">Nos vemos a las 15</textarea>
+
+        <label for="xor-clave">Clave</label>
+        <input type="text" id="xor-clave" value="equipo1">
+
+        <div class="btn-row">
+          <button class="btn" onclick="xorCifrar()">Cifrar → hexadecimal</button>
+        </div>
+        <label>Mensaje cifrado (en hexadecimal)</label>
+        <div class="output-box" id="xor-cifrado">—</div>
+
+        <hr class="sep">
+
+        <label for="xor-hex-in">Pegá acá un mensaje cifrado en hexadecimal</label>
+        <textarea id="xor-hex-in" rows="2" placeholder="ej: 1a 2b 3c ..."></textarea>
+        <label for="xor-clave-in">Clave para descifrar</label>
+        <input type="text" id="xor-clave-in" value="equipo1">
+        <div class="btn-row">
+          <button class="btn" onclick="xorDescifrar()">Descifrar → texto</button>
+        </div>
+        <label>Texto obtenido</label>
+        <div class="output-box" id="xor-texto-out">—</div>
+
+        <div class="callout">
+          <strong>Para probar:</strong> cifrá un mensaje arriba, copiá el resultado hexadecimal, pegalo en
+          el campo de abajo con la misma clave, y descifralo. Después probá con una clave distinta:
+          vas a obtener texto sin sentido.
+        </div>
+      </div>
+    </div>
+
+    <h2>Para llevar a la Etapa 2</h2>
+    <p>
+      Cifrar el mensaje resuelve un problema, pero deja uno nuevo: cualquiera que vea el archivo va a
+      notar que hay un montón de texto sin sentido — y eso ya llama la atención. Guardá tu mensaje
+      cifrado (César o XOR): en la próxima etapa lo vamos a <strong>ocultar</strong> dentro de una imagen.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="../index.html">← Inicio</a>
+      <a class="btn" href="esteganografia.html">Ir a Etapa 2: Esteganografía →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="../licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+const shiftSlider = document.getElementById('cesar-shift');
+shiftSlider.addEventListener('input', () => {
+  document.getElementById('cesar-shift-val').textContent = shiftSlider.value;
+});
+
+function caesarShift(str, shift) {
+  shift = ((shift % 26) + 26) % 26;
+  return str.toUpperCase().split('').map(ch => {
+    const code = ch.charCodeAt(0);
+    if (code >= 65 && code <= 90) {
+      return String.fromCharCode(((code - 65 + shift) % 26) + 65);
+    }
+    return ch;
+  }).join('');
+}
+
+function cesarCifrar(){
+  const texto = document.getElementById('cesar-texto').value;
+  const shift = parseInt(shiftSlider.value, 10);
+  document.getElementById('cesar-resultado').textContent = caesarShift(texto, shift);
+}
+function cesarDescifrar(){
+  const texto = document.getElementById('cesar-texto').value;
+  const shift = parseInt(shiftSlider.value, 10);
+  document.getElementById('cesar-resultado').textContent = caesarShift(texto, 26 - shift);
+}
+function fuerzaBruta(){
+  const cifrado = document.getElementById('cesar-reto').textContent;
+  const box = document.getElementById('cesar-bruta');
+  let lines = [];
+  for (let k = 0; k <= 25; k++) {
+    lines.push('clave ' + k + ':  ' + caesarShift(cifrado, 26 - k));
+  }
+  box.style.display = 'block';
+  box.textContent = lines.join('\n');
+}
+
+function xorHex(text, key) {
+  const enc = new TextEncoder();
+  const tBytes = enc.encode(text);
+  const kBytes = enc.encode(key);
+  if (kBytes.length === 0) return '';
+  const out = [];
+  for (let i = 0; i < tBytes.length; i++) {
+    out.push((tBytes[i] ^ kBytes[i % kBytes.length]).toString(16).padStart(2, '0'));
+  }
+  return out.join(' ');
+}
+function xorFromHex(hex, key) {
+  const bytes = hex.trim().split(/\s+/).filter(Boolean).map(h => parseInt(h, 16));
+  const kBytes = new TextEncoder().encode(key);
+  if (kBytes.length === 0 || bytes.some(isNaN)) return '(clave vacía o formato inválido)';
+  const out = new Uint8Array(bytes.length);
+  for (let i = 0; i < bytes.length; i++) out[i] = bytes[i] ^ kBytes[i % kBytes.length];
+  try { return new TextDecoder('utf-8', {fatal:false}).decode(out); }
+  catch(e){ return '(no se pudo decodificar — ¿clave correcta?)'; }
+}
+function xorCifrar(){
+  const texto = document.getElementById('xor-texto').value;
+  const clave = document.getElementById('xor-clave').value;
+  document.getElementById('xor-cifrado').textContent = clave ? xorHex(texto, clave) : '(escribí una clave)';
+}
+function xorDescifrar(){
+  const hex = document.getElementById('xor-hex-in').value;
+  const clave = document.getElementById('xor-clave-in').value;
+  document.getElementById('xor-texto-out').textContent = clave ? xorFromHex(hex, clave) : '(escribí una clave)';
+}
+</script>
+</body>
+</html>
