@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentación — Misión: Mensaje Secreto</title>
+<meta name="description" content="Presentación de 13 diapositivas con texto, diagramas e indicaciones de video (formato DUA) para el recurso Misión: Mensaje Secreto.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html" class="active">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container deck">
+
+    <!-- 1 -->
+    <section class="slide active">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Ciencias de la Computación · 8° EBI</p>
+          <h1>Misión: Mensaje Secreto</h1>
+          <p class="lead">Criptografía, esteganografía y funciones hash para proteger la información digital.</p>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="55" y="90" width="90" height="75" rx="10"/>
+            <path d="M75 90 V65 a25 25 0 0 1 50 0 V90"/>
+            <circle cx="100" cy="122" r="9" fill="currentColor" stroke="none"/>
+            <path d="M100 131 V148" />
+          </svg>
+          <p class="diagram-caption">candado.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Pregunta disparadora</p>
+          <h1>¿Qué pasa realmente con un mensaje desde que lo enviamos hasta que llega a la otra persona?</h1>
+          <p>Entre que tocamos "enviar" y el mensaje aparece en la otra pantalla, esa información viaja
+          por redes que no controlamos, pasando por servidores y dispositivos intermedios — cualquiera
+          de esos puntos es, en teoría, un lugar donde alguien podría leerla, copiarla o cambiarla.</p>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 220 160" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="55" width="34" height="60" rx="6"/>
+            <rect x="176" y="55" width="34" height="60" rx="6"/>
+            <path d="M50 85 H170" stroke-dasharray="6 8"/>
+            <path d="M150 75 L170 85 L150 95" fill="none"/>
+            <circle class="accent2" cx="108" cy="55" r="16" stroke="currentColor"/>
+            <path class="accent2" d="M98 55 a10 8 0 0 1 20 0" />
+            <circle class="accent2" cx="108" cy="55" r="4" fill="currentColor" stroke="none"/>
+          </svg>
+          <p class="diagram-caption">mensaje_en_transito.svg</p>
+        </div>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/rw41W8crZ_Y?si=JRechaFiL7vWf5v8" title="¿Cómo funciona Internet? — video educativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <h2>Situaciones cotidianas</h2>
+      <div class="grid">
+        <div class="card">
+          <svg class="diagram" style="max-width:70px" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 20 h70 a8 8 0 0 1 8 8 v40 a8 8 0 0 1 -8 8 H40 L20 90 V76 H15 a8 8 0 0 1 -8 -8 V28 a8 8 0 0 1 8 -8 Z"/>
+          </svg>
+          <p>¿Cómo hace WhatsApp para que solo la persona destinataria pueda leer un mensaje?</p>
+        </div>
+        <div class="card">
+          <svg class="diagram" style="max-width:70px" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M50 10 L85 25 V50 c0 25 -15 38 -35 45 c-20 -7 -35 -20 -35 -45 V25 Z"/>
+            <path d="M35 50 l11 11 l22 -24"/>
+          </svg>
+          <p>¿Cómo sabe tu celular que una actualización no fue modificada antes de instalarla?</p>
+        </div>
+        <div class="card">
+          <svg class="diagram" style="max-width:70px" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="25" y="42" width="50" height="42" rx="8"/>
+            <path d="M38 42 V30 a12 12 0 0 1 24 0 v12"/>
+            <circle cx="50" cy="62" r="5" fill="currentColor" stroke="none"/>
+          </svg>
+          <p>¿Cómo envían información sensible los bancos o las tiendas cuando hacés una compra por Internet?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">La misión</p>
+          <h1>Enviar un mensaje secreto a otro equipo</h1>
+          <ul>
+            <li>Que no pueda ser <strong>leído</strong> si alguien lo intercepta.</li>
+            <li>Que no pueda ser <strong>descubierto</strong> aunque nadie lo lea.</li>
+            <li>Que se pueda comprobar que no fue <strong>modificado</strong> en el camino.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="60" cy="55" r="30"/>
+            <path d="M45 55 h30 M30 40 L90 70 M30 70 L90 40" class="accent2"/>
+            <path d="M60 115 a30 30 0 1 0 0.1 0" transform="translate(0 45)"/>
+            <path d="M45 145 q15 -18 30 0" />
+            <path d="M55 165 h10" class="accent2"/>
+            <rect x="130" y="20" width="60" height="60" rx="10"/>
+            <path d="M145 20 V8 a15 15 0 0 1 30 0 v12"/>
+            <path d="M150 155 l14 14 l26 -30" class="accent2" transform="translate(0 0)"/>
+            <circle cx="160" cy="160" r="32" transform="translate(0 -5)"/>
+          </svg>
+          <p class="diagram-caption">leer_x · descubrir_x · verificar_ok</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Etapa 1</p>
+          <h1>🔐 Criptografía</h1>
+          <blockquote class="question">¿Cómo hacemos para que nadie pueda leer nuestro mensaje si alguien lo intercepta?</blockquote>
+          <blockquote class="question">¿Alcanza con ponerle una contraseña a un archivo?</blockquote>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="45" cy="60" r="30"/>
+            <circle cx="45" cy="60" r="9" fill="currentColor" stroke="none"/>
+            <path d="M75 60 H180" class="accent2"/>
+            <path d="M120 60 v18 M150 60 v18 M180 60 v-14 h-14" class="accent2"/>
+          </svg>
+          <p class="diagram-caption">llave.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <h2>Contraseña de archivo ≠ cifrado</h2>
+      <div class="slide-flex">
+        <div class="slide-text">
+          <ul>
+            <li>Una contraseña controla <strong>quién puede abrir</strong> el archivo.</li>
+            <li>Cifrar <strong>transforma el contenido</strong> mismo, con una clave.</li>
+            <li>Cifrado simétrico: la misma clave sirve para cifrar y para descifrar (así funciona WhatsApp).</li>
+            <li>Herramientas del recurso: cifrado César (didáctico) y cifrado XOR.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 220 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <text x="8" y="30" font-family="monospace" font-size="20" stroke="none" fill="currentColor">HOLA</text>
+            <path d="M75 24 h30" class="accent2"/>
+            <path d="M95 17 l12 7 l-12 7" class="accent2" fill="none"/>
+            <text x="120" y="30" font-family="monospace" font-size="20" stroke="none" fill="currentColor" class="accent2">KRÑD</text>
+            <text x="8" y="80" font-family="monospace" font-size="12" stroke="none" fill="currentColor">clave: desplazamiento 3</text>
+          </svg>
+          <p class="diagram-caption">cifrado_cesar_ejemplo.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Etapa 2</p>
+          <h1>🖼️ Esteganografía</h1>
+          <blockquote class="question">Si el mensaje ya está cifrado, ¿todos saben igual que estamos enviando algo secreto?</blockquote>
+          <blockquote class="question">¿Qué pasaría si además de cifrarlo pudiéramos ocultar que existe?</blockquote>
+        </div>
+        <div class="slide-media">
+          <img class="slide-photo" src="assets/img/gatito-cc-by-marie-lan-nguyen.jpg" alt="Gatito atigrado y blanco mirando de frente, apoyado sobre una superficie clara">
+          <p class="photo-credit">Foto: Marie-Lan Nguyen / Wikimedia Commons ·
+          <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener">CC BY 2.5</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <h2>Ocultar dentro de una imagen</h2>
+      <div class="slide-flex">
+        <div class="slide-text">
+          <ul>
+            <li>Cada píxel se guarda como tres números: rojo, verde, azul (0 a 255).</li>
+            <li>En binario, cada número son 8 bits: por ejemplo <code>11010010</code>.</li>
+            <li>Cambiar el <strong>último bit</strong> (el menos significativo) es invisible al ojo humano.</li>
+            <li>Ahí se puede "esconder" un mensaje, un bit por cada canal de color de cada píxel.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 220 90" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+            <g font-family="monospace" font-size="22" stroke="none" fill="currentColor">
+              <text x="0" y="35">1 1 0 1 0 0 1</text>
+            </g>
+            <rect x="176" y="10" width="26" height="30" rx="4" class="accent2" fill="none" stroke="currentColor" stroke-width="4"/>
+            <text x="182" y="34" font-family="monospace" font-size="22" stroke="none" fill="currentColor" class="accent2">0</text>
+            <path d="M186 46 v14" class="accent2"/>
+            <text x="150" y="80" font-family="monospace" font-size="11" stroke="none" fill="currentColor" class="accent2">bit del mensaje secreto</text>
+          </svg>
+          <p class="diagram-caption">byte_de_color_con_lsb.svg</p>
+        </div>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/MwIDSCIQOoY?si=lp9EiCZovenj9TTR" title="El Arte de Ocultar Mensajes Secretos a Plena Vista | Ciberseguridad" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Etapa 3</p>
+          <h1>🧬 Funciones hash</h1>
+          <blockquote class="question">Descargaste un mod para Minecraft. ¿Cómo sabés que nadie lo modificó para meterle un virus?</blockquote>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 160 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M40 30 a40 40 0 0 1 80 0 v50 a40 60 0 0 1 -20 100"/>
+            <path d="M55 30 a25 25 0 0 1 50 0 v55 a25 70 0 0 1 -12 95" class="accent2"/>
+            <path d="M65 35 a15 15 0 0 1 30 0 v60 a15 80 0 0 1 -6 90"/>
+            <path d="M75 40 v130" class="accent2"/>
+          </svg>
+          <p class="diagram-caption">huella_digital.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <h2>Una huella digital del contenido</h2>
+      <div class="slide-flex">
+        <div class="slide-text">
+          <ul>
+            <li><strong>Determinística:</strong> la misma entrada siempre da el mismo hash.</li>
+            <li><strong>Unidireccional:</strong> no se puede "deshacer" para recuperar el original — no es cifrado.</li>
+            <li><strong>Efecto avalancha:</strong> un solo carácter distinto cambia el hash por completo.</li>
+            <li>Ejemplo cotidiano: los sitios web guardan el hash de tu contraseña, no la contraseña misma.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 220 130" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="70" height="26" rx="6"/>
+            <text x="14" y="27" font-family="monospace" font-size="12" stroke="none" fill="currentColor">"hola"</text>
+            <rect x="4" y="60" width="70" height="26" rx="6" class="accent2"/>
+            <text x="14" y="77" font-family="monospace" font-size="12" stroke="none" fill="currentColor" class="accent2">"holA"</text>
+            <path d="M78 23 H130 M78 73 H130" stroke-dasharray="4 6"/>
+            <rect x="130" y="45" width="50" height="40" rx="8"/>
+            <text x="138" y="70" font-family="monospace" font-size="11" stroke="none" fill="currentColor">SHA-256</text>
+            <path d="M184 65 H210"/>
+            <path d="M195 58 l12 7 l-12 7"/>
+          </svg>
+          <p class="diagram-caption">entrada_parecida_salida_distinta.svg</p>
+        </div>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Whj2sm6WJ-o?si=P-pRdJJlDeIg3dGp" title="Efecto avalancha y colisiones de las funciones hash" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Desafío final</p>
+          <h1>Las tres técnicas juntas</h1>
+          <ul>
+            <li>Equipo A: cifra → oculta en una imagen → calcula el hash del mensaje original.</li>
+            <li>Equipo B: revela la imagen → descifra con la clave acordada → verifica el hash.</li>
+            <li>La clave se acuerda en persona, antes de empezar — nunca viaja junto al mensaje.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 220 120" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="30" cy="60" r="20"/>
+            <circle cx="190" cy="60" r="20" class="accent2"/>
+            <rect x="80" y="40" width="60" height="40" rx="8" stroke-dasharray="5 6"/>
+            <path d="M50 60 H80 M140 60 H170" />
+            <path d="M158 53 l12 7 l-12 7"/>
+            <text x="90" y="65" font-family="monospace" font-size="11" stroke="none" fill="currentColor">🔒🖼️#</text>
+          </svg>
+          <p class="diagram-caption">intercambio_entre_equipos.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <h2>Para cerrar</h2>
+      <blockquote class="question">¿Por qué en la vida real no se usa una sola de estas técnicas?</blockquote>
+      <blockquote class="question">¿Qué aplicaciones que usamos todos los días creen que las usan?</blockquote>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <div class="slide-flex">
+        <div class="slide-text">
+          <p class="eyebrow">Cierre</p>
+          <h1>Hoy usaron versiones simplificadas de técnicas reales</h1>
+          <p class="lead">Presentes todos los días cuando mandan un mensaje por WhatsApp, hacen una compra
+          por Internet, descargan un archivo o acceden a un servicio digital.</p>
+        </div>
+        <div class="slide-media">
+          <svg class="diagram" viewBox="0 0 160 160" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="80" cy="80" r="65"/>
+            <path class="accent2" d="M50 82 l20 20 l40 -45"/>
+          </svg>
+          <p class="diagram-caption">mision_cumplida.svg</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="deck-controls">
+      <button class="btn secondary" id="btn-prev">← Anterior</button>
+      <span class="deck-progress" id="deck-progress">1 / 13</span>
+      <button class="btn" id="btn-next">Siguiente →</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+function showSlide(i){
+  slides.forEach(s => s.classList.remove('active'));
+  current = Math.max(0, Math.min(i, slides.length - 1));
+  slides[current].classList.add('active');
+  document.getElementById('deck-progress').textContent = (current + 1) + ' / ' + slides.length;
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').disabled = current === slides.length - 1;
+}
+document.getElementById('btn-prev').addEventListener('click', () => showSlide(current - 1));
+document.getElementById('btn-next').addEventListener('click', () => showSlide(current + 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') showSlide(current + 1);
+  if (e.key === 'ArrowLeft') showSlide(current - 1);
+});
+showSlide(0);
+</script>
+</body>
+</html>

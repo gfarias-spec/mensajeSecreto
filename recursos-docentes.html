@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre el recurso — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html" class="active">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Sobre el recurso</p>
+    <h1>Sobre el recurso</h1>
+    <p class="lead">
+      Planificación, fundamentación y condiciones de uso del recurso: guía para dar la clase,
+      fuentes utilizadas, cómo se usó IA en su elaboración, y bajo qué licencia se puede reutilizar.
+    </p>
+
+    <div class="grid">
+      <a class="stage-card" href="guia-docente.html">
+        <span class="stage-num">ORIENTACIONES</span>
+        <h3>📋 Guía docente</h3>
+        <p>Ubicación curricular, propósitos de aprendizaje, secuencia de clases sugerida, evaluación,
+        DUA e inclusión, extensiones posibles.</p>
+      </a>
+      <a class="stage-card" href="bibliografia.html">
+        <span class="stage-num">FUENTES</span>
+        <h3>📚 Bibliografía</h3>
+        <p>Programas oficiales de ANEP, bibliografía técnica y referencias de los videos e imagen
+        utilizados en el recurso.</p>
+      </a>
+      <a class="stage-card" href="declaracion-ia.html">
+        <span class="stage-num">TRANSPARENCIA</span>
+        <h3>🤖 Declaración de uso de IA</h3>
+        <p>Detalle de qué partes del recurso fueron elaboradas por el docente y cuáles con asistencia
+        de inteligencia artificial.</p>
+      </a>
+      <a class="stage-card" href="licencia.html">
+        <span class="stage-num">REUTILIZACIÓN</span>
+        <h3>⚖️ Licencia</h3>
+        <p>Términos de uso (CC BY 4.0), qué se puede reutilizar libremente, y cómo descargar el recurso
+        completo para desplegarlo en un LMS.</p>
+      </a>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="index.html">← Volver al recurso</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html" class="active">Evaluación</a>
+      <a href="recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Evaluación</p>
+    <h1>📋 Evaluación de la misión</h1>
+    <p class="lead">
+      Esta página tiene dos partes: una <strong>autoevaluación</strong> para que cada estudiante revise
+      lo que entendió, y una <strong>reflexión escrita</strong> para completar en equipo.
+    </p>
+
+    <h2>1 · Autoevaluación (individual)</h2>
+    <p>Diez preguntas para chequear qué tan clara quedó la diferencia entre las tres técnicas. No es
+    una nota, es para que ustedes mismos vean qué repasar.</p>
+
+    <div id="quiz-container"></div>
+    <p class="quiz-score" id="quiz-score-final" style="display:none;"></p>
+
+    <hr class="sep">
+
+    <h2>2 · Reflexión en equipo</h2>
+    <p>Respondan en conjunto — estas respuestas pueden formar parte de la bitácora o portafolio del
+    equipo. Se guardan automáticamente en este navegador mientras las escriben.</p>
+
+    <label for="r1">¿Por qué en la vida real no se usa una sola de estas tres técnicas para proteger la información?</label>
+    <textarea id="r1" rows="3"></textarea>
+
+    <label for="r2">¿En qué situaciones conviene cifrar, ocultar o verificar la integridad de un archivo?</label>
+    <textarea id="r2" rows="3"></textarea>
+
+    <label for="r3">¿Qué aplicaciones que usan todos los días creen que utilizan alguna de estas tres técnicas? Den al menos dos ejemplos.</label>
+    <textarea id="r3" rows="3"></textarea>
+
+    <label for="r4">Durante el Desafío final: ¿qué parte les resultó más difícil, cifrar, ocultar o verificar? ¿Por qué?</label>
+    <textarea id="r4" rows="3"></textarea>
+
+    <p class="hint" id="save-indicator"></p>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="actividades/desafio-final.html">← Volver al desafío final</a>
+      <a class="btn" href="recursos-docentes.html">Sobre el recurso →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+const preguntas = [
+  { q: "Querés que un mensaje sea ilegible para quien lo intercepte, aunque sepa que existe. ¿Qué técnica usás?", opts: ["Criptografía", "Esteganografía", "Función hash"], correcta: 0 },
+  { q: "Querés que nadie sospeche que estás enviando información oculta. ¿Qué técnica usás?", opts: ["Función hash", "Esteganografía", "Criptografía"], correcta: 1 },
+  { q: "Querés comprobar que un archivo descargado no fue modificado. ¿Qué técnica usás?", opts: ["Esteganografía", "Criptografía", "Función hash"], correcta: 2 },
+  { q: "En el cifrado simétrico (como el que usa WhatsApp), la clave para cifrar y descifrar es...", opts: ["Siempre distinta para cada persona", "La misma para ambas partes", "Generada por la app en cada mensaje sin acuerdo previo"], correcta: 1 },
+  { q: "¿Por qué el cifrado César es fácil de romper sin conocer la clave?", opts: ["Porque solo cifra números", "Porque solo existen 25 claves posibles y se pueden probar todas", "Porque no usa ningún tipo de clave"], correcta: 1 },
+  { q: "Una función hash es...", opts: ["Reversible: se puede usar la clave para recuperar el original", "Unidireccional: no se puede deshacer para recuperar el original", "Un tipo de contraseña de archivo"], correcta: 1 },
+  { q: "Si cambio una sola letra de un mensaje, ¿qué pasa con su hash SHA-256?", opts: ["No cambia nada", "Cambia levemente, en la misma proporción", "Cambia por completo (efecto avalancha)"], correcta: 2 },
+  { q: "¿Ponerle una contraseña a un archivo ZIP es lo mismo que cifrarlo?", opts: ["Sí, es exactamente lo mismo", "No: la contraseña solo controla el acceso, no transforma el contenido como el cifrado", "No, porque los ZIP no se pueden proteger"], correcta: 1 },
+  { q: "¿Qué guardan habitualmente los sitios web en vez de tu contraseña real?", opts: ["Tu contraseña tal cual la escribiste", "El hash de tu contraseña", "Una imagen de tu contraseña"], correcta: 1 },
+  { q: "Que WhatsApp use \"cifrado de extremo a extremo\" significa que...", opts: ["Solo emisor y receptor tienen la clave para leer el mensaje, ni siquiera la empresa", "WhatsApp guarda una copia de todos los mensajes sin cifrar", "El mensaje se oculta dentro de una imagen automáticamente"], correcta: 0 }
+];
+
+const container = document.getElementById('quiz-container');
+let score = 0;
+let respondidas = 0;
+
+preguntas.forEach((p, i) => {
+  const div = document.createElement('div');
+  div.className = 'quiz-q';
+  const qText = document.createElement('p');
+  qText.className = 'q-text';
+  qText.textContent = (i + 1) + '. ' + p.q;
+  div.appendChild(qText);
+
+  p.opts.forEach((opt, j) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => {
+      if (btn.dataset.answered) return;
+      const opts = div.querySelectorAll('.quiz-opt');
+      opts.forEach(o => o.dataset.answered = 'true');
+      if (j === p.correcta) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('incorrect');
+        opts[p.correcta].classList.add('correct');
+      }
+      respondidas++;
+      if (respondidas === preguntas.length) {
+        const el = document.getElementById('quiz-score-final');
+        el.style.display = 'block';
+        el.textContent = 'Puntaje: ' + score + ' / ' + preguntas.length;
+      }
+    });
+    div.appendChild(btn);
+  });
+
+  container.appendChild(div);
+});
+
+['r1','r2','r3','r4'].forEach(id => {
+  const el = document.getElementById(id);
+  const saved = localStorage.getItem('mision-' + id);
+  if (saved) el.value = saved;
+  el.addEventListener('input', () => {
+    localStorage.setItem('mision-' + id, el.value);
+    const ind = document.getElementById('save-indicator');
+    ind.textContent = 'Respuestas guardadas en este navegador.';
+    clearTimeout(window._saveTimeout);
+    window._saveTimeout = setTimeout(() => ind.textContent = '', 2000);
+  });
+});
+</script>
+</body>
+</html>

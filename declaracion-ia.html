@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Declaración de uso de IA — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html" class="active">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Declaración de uso de IA</p>
+    <h1>Declaración de uso de Inteligencia Artificial en este recurso</h1>
+
+    <p class="lead">
+      En línea con el principio de transparencia sobre el uso de inteligencia artificial en el ámbito
+      educativo establecido por la <a href="bibliografia.html">Circular N.º 23/2024 del CODICEN</a>
+      ("La inteligencia artificial en la educación"), se detalla a continuación qué partes de este
+      recurso fueron elaboradas por el Profesor Gustavo Farías Parisi y cuáles con asistencia de IA.
+    </p>
+
+    <div class="callout">
+      <strong>Herramienta utilizada:</strong> Claude (Anthropic), un asistente de inteligencia artificial
+      conversacional, utilizado durante el proceso de desarrollo de este recurso específico.
+    </div>
+
+    <h2>Detalle por componente</h2>
+    <div style="overflow-x:auto;">
+    <table class="rubric">
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Autoría</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Idea pedagógica, narrativa de "la Misión" y secuencia didáctica completa</td>
+          <td>Profesor Gustavo Farías Parisi</td>
+        </tr>
+        <tr>
+          <td>Preguntas de cierre y contextualización a la vida cotidiana de los estudiantes</td>
+          <td>Profesor Gustavo Farías Parisi</td>
+        </tr>
+        <tr>
+          <td>Redacción del texto de cada página (explicaciones, consignas)</td>
+          <td>Redactados por el Profesor Gustavo Farías Parisi y revisados y corregidos por IA (Claude,
+          Anthropic); con aprobación del Profesor Gustavo Farías Parisi antes de publicar</td>
+        </tr>
+        <tr>
+          <td>Diseño visual y maquetación (HTML/CSS)</td>
+          <td>IA (Claude, Anthropic), supervisado por el Profesor Gustavo Farías Parisi</td>
+        </tr>
+        <tr>
+          <td>Código de las herramientas interactivas (cifrado César/XOR, esteganografía, calculadora
+          de hash, cuestionario)</td>
+          <td>IA (Claude, Anthropic), supervisado por el Profesor Gustavo Farías Parisi</td>
+        </tr>
+        <tr>
+          <td>Revisión y validación final del contenido</td>
+          <td>Profesor Gustavo Farías Parisi</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Alcance de esta declaración:</strong> ningún dato personal de estudiantes fue procesado
+      por herramientas de IA en la elaboración de este recurso. Las herramientas interactivas del sitio
+      (cifrado, esteganografía, cálculo de hash) se ejecutan íntegramente en el navegador de quien las usa;
+      no envían información a servicios de IA ni a ningún servidor externo.
+    </div>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="bibliografia.html">← Bibliografía</a>
+      <a class="btn" href="guia-docente.html">Ver Guía docente →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

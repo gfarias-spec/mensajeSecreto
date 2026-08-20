@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misión: Mensaje Secreto — 8° EBI</title>
+<meta name="description" content="Recurso educativo de Ciencias de la Computación (8° EBI): criptografía, esteganografía y funciones hash a través de una misión de protección de la información digital.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar tema claro/oscuro">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Ciencias de la Computación · 8° EBI · Alfabetización y Ciudadanía Digital</p>
+    <h1>¿Cómo protegemos la información digital cuando enviamos mensajes, fotos o archivos por Internet?</h1>
+    <p class="lead">
+      Todos los días enviamos mensajes por WhatsApp, hacemos compras, descargamos mods para nuestros
+      juegos favoritos y actualizamos nuestro celular. En cada una de esas acciones, la información
+      viaja por Internet expuesta a que alguien la lea, la intercepte o la modifique sin que nos demos cuenta.
+    </p>
+
+    <div class="callout">
+      <strong>La misión:</strong> en equipos, van a tener que enviar un mensaje secreto a otro equipo,
+      de forma que <em>nadie más pueda leerlo</em>, <em>nadie note que existe</em> y el equipo que lo reciba
+      <em>pueda comprobar que llegó exactamente igual a como se envió</em>.
+    </div>
+
+    <p>Para lograrlo van a necesitar tres técnicas distintas, cada una responde una pregunta distinta:</p>
+
+    <div class="grid">
+      <a class="stage-card" href="actividades/criptografia.html">
+        <span class="stage-num">ETAPA 1</span>
+        <h3>🔐 Criptografía</h3>
+        <p>¿Cómo hago para que nadie pueda leer mi mensaje aunque lo intercepte?</p>
+      </a>
+      <a class="stage-card" href="actividades/esteganografia.html">
+        <span class="stage-num">ETAPA 2</span>
+        <h3>🖼️ Esteganografía</h3>
+        <p>¿Cómo hago para que nadie note que estoy enviando algo secreto?</p>
+      </a>
+      <a class="stage-card" href="actividades/hashes.html">
+        <span class="stage-num">ETAPA 3</span>
+        <h3>🧬 Funciones hash</h3>
+        <p>¿Cómo compruebo que lo que llegó es exactamente lo que se envió?</p>
+      </a>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" href="actividades/criptografia.html">Empezar la misión →</a>
+      <a class="btn secondary" href="presentacion.html">Ver presentación</a>
+      <a class="btn secondary" href="recursos-docentes.html">Soy docente</a>
+    </div>
+
+    <hr class="sep">
+
+    <h2>Preguntas para empezar a pensar</h2>
+    <p>Antes de entrar en la primera etapa, conversen en equipo:</p>
+    <blockquote class="question">¿Cómo hace WhatsApp para que solo la persona destinataria pueda leer un mensaje?</blockquote>
+    <blockquote class="question">¿Cómo sabe tu celular que una actualización no fue modificada antes de instalarla?</blockquote>
+    <blockquote class="question">Descargaste un mod para Minecraft. ¿Cómo sabés que realmente lo hizo quien dice haberlo hecho, y que nadie lo modificó para meterle un virus?</blockquote>
+    <blockquote class="question">¿Cómo envían información sensible los bancos o las tiendas cuando hacés una compra por Internet?</blockquote>
+
+    <p class="small">
+      No hace falta responderlas todavía: son las preguntas que las tres etapas de esta misión
+      van a ayudarlos a responder.
+    </p>
+
+    <h2>Cómo está organizada la misión</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Etapa 1 · Criptografía</h3>
+        <p>Cifrado César y cifrado XOR. Transformar el mensaje para que sea ilegible sin la clave.</p>
+      </div>
+      <div class="card">
+        <h3>Etapa 2 · Esteganografía</h3>
+        <p>Ocultar el mensaje (ya cifrado) dentro de una imagen, para que nadie sospeche que existe.</p>
+      </div>
+      <div class="card">
+        <h3>Etapa 3 · Funciones hash</h3>
+        <p>Calcular una huella digital del mensaje original para comprobar que no fue alterado.</p>
+      </div>
+      <div class="card">
+        <h3>Desafío final</h3>
+        <p>Un equipo envía un mensaje usando las tres técnicas juntas; otro equipo debe recuperarlo y verificarlo.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

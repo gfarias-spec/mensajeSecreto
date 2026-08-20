@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licencia — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Licencia</p>
+    <h1>Licencia de uso y reutilización</h1>
+
+    <div class="callout">
+      <strong>Este recurso (texto, código, diseño y diagramas originales) está disponible bajo licencia
+      Creative Commons Atribución 4.0 Internacional (CC BY 4.0).</strong> Podés usarlo, copiarlo,
+      modificarlo, adaptarlo y redistribuirlo, incluso con fines comerciales, siempre que des crédito
+      apropiado.
+    </div>
+
+    <h2>Qué cubre esta licencia</h2>
+    <ul>
+      <li>Todo el texto de las páginas (explicaciones, consignas, preguntas).</li>
+      <li>El código HTML, CSS y JavaScript de las herramientas interactivas (cifrado, esteganografía,
+      calculadora de hash, cuestionario, presentación).</li>
+      <li>Los diagramas SVG originales de la presentación.</li>
+      <li>La estructura pedagógica y didáctica del recurso.</li>
+    </ul>
+
+    <h2>Qué NO cubre esta licencia</h2>
+    <div class="callout warn">
+      <p style="margin-top:0;"><strong>Contenido de terceros incluido en el recurso, con su propia licencia:</strong></p>
+      <ul style="margin-bottom:0;">
+        <li>
+          Los 3 videos embebidos en la <a href="presentacion.html">Presentación</a> (diapositivas 2, 8 y 10)
+          son propiedad de sus respectivos canales de YouTube (Sabin Ingeniería Civil, Ciberu, Blockchain
+          Lanzarote) e insertados bajo los términos estándar de inserción de YouTube. Ver
+          <a href="bibliografia.html">Bibliografía</a> para las referencias completas.
+        </li>
+        <li>
+          La fotografía de la diapositiva 7 ("Golden tabby and white kitten", Marie-Lan Nguyen) mantiene su
+          licencia original
+          <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener">CC BY 2.5</a>.
+          Si la reutilizás por separado, atribuila según esa licencia específica, no según la de este recurso.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Cómo atribuir</h2>
+    <p>Al reutilizar este recurso (total o parcialmente), incluí una atribución como esta:</p>
+    <div class="output-box">"Misión: Mensaje Secreto" por Prof. Gustavo Farías Parisi, bajo licencia CC BY 4.0.
+https://creativecommons.org/licenses/by/4.0/</div>
+
+    <h2>Llevarse solo una parte</h2>
+    <p>
+      El recurso no tiene compilación ni dependencias ocultas entre páginas: cada archivo HTML es
+      autocontenido y solo necesita la hoja de estilos compartida. Para reutilizar únicamente una pieza,
+      alcanza con copiar el archivo correspondiente junto con <code>assets/style.css</code>:
+    </p>
+    <table class="rubric">
+      <thead><tr><th>Si solo querés...</th><th>Copiá estos archivos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>La herramienta de cifrado (César/XOR)</td>
+          <td><code>actividades/criptografia.html</code> + <code>assets/style.css</code></td>
+        </tr>
+        <tr>
+          <td>La herramienta de esteganografía</td>
+          <td><code>actividades/esteganografia.html</code> + <code>assets/style.css</code></td>
+        </tr>
+        <tr>
+          <td>La calculadora de hash</td>
+          <td><code>actividades/hashes.html</code> + <code>assets/style.css</code></td>
+        </tr>
+        <tr>
+          <td>La presentación (13 diapositivas)</td>
+          <td><code>presentacion.html</code> + <code>assets/style.css</code> + <code>assets/img/</code></td>
+        </tr>
+        <tr>
+          <td>El cuestionario de evaluación</td>
+          <td><code>evaluacion.html</code> + <code>assets/style.css</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="hint">
+      Los enlaces del menú a otras páginas van a quedar rotos si copiás un archivo suelto — es esperable;
+      simplemente eliminá o adaptá esos enlaces de navegación en tu copia.
+    </p>
+
+    <h2>Descargar el recurso completo</h2>
+    <p>
+      Para desplegarlo en un LMS (Schoology, Moodle, Google Classroom, etc.) alojando los archivos en tu
+      propio servidor o servicio de hosting y embebiéndolo con un <code>&lt;iframe&gt;</code>:
+    </p>
+    <div class="btn-row">
+      <a class="btn" href="descargas/mision-mensaje-secreto8vo.zip" download>⬇ Descargar recurso completo (.zip)</a>
+    </div>
+    <div class="callout warn">
+      <strong>Importante para el despliegue:</strong> la calculadora de hash (Web Crypto API) solo
+      funciona si el sitio se sirve por <strong>HTTPS</strong> (o <code>localhost</code>). Si lo alojás
+      en un servidor sin HTTPS, todo el resto del recurso funciona igual, excepto esa herramienta puntual.
+      La mayoría de los servicios de hosting y LMS actuales usan HTTPS por defecto.
+    </div>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="recursos-docentes.html">← Sobre el recurso</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

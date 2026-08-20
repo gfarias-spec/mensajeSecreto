@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía docente — Misión: Mensaje Secreto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html"><span class="dot"></span>Misión: Mensaje Secreto</a>
+    <nav class="links">
+      <a href="index.html">Inicio</a>
+      <a href="presentacion.html">Presentación</a>
+      <a href="actividades/criptografia.html">1 · Criptografía</a>
+      <a href="actividades/esteganografia.html">2 · Esteganografía</a>
+      <a href="actividades/hashes.html">3 · Hashes</a>
+      <a href="actividades/desafio-final.html">Desafío final</a>
+      <a href="evaluacion.html">Evaluación</a>
+      <a href="recursos-docentes.html" class="active">Sobre el recurso</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌓</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <p class="eyebrow">Guía docente</p>
+    <h1>Misión: Mensaje Secreto — orientaciones para el aula</h1>
+
+    <h2>Ubicación curricular</h2>
+    <p>
+      Recurso de <strong>Ciencias de la Computación, 8° EBI</strong>, eje temático
+      <strong>Alfabetización y Ciudadanía Digital</strong>. Profundiza y complementa el contenido de
+      Ciberseguridad ya trabajado en el eje (gestión de credenciales, autenticación, phishing,
+      ransomware), incorporando tres contenidos que hoy no están cubiertos por ningún recurso existente
+      del programa: <strong>criptografía</strong>, <strong>esteganografía</strong> y
+      <strong>funciones hash</strong>.
+    </p>
+    <div class="callout">
+      <strong>Tema previo recomendado:</strong> haber trabajado la representación binaria de la
+      información y la codificación de imágenes en píxeles (eje Procesamiento de información, 8° EBI),
+      ya que la actividad de esteganografía se apoya en esa noción. También resulta útil haber visto el
+      módulo de ciberseguridad (contraseñas, autenticación) del mismo eje, para contrastar "contraseña de
+      archivo" con "cifrado".
+    </div>
+
+    <h2>Por qué un mismo recurso para los tres contenidos</h2>
+    <p>
+      Criptografía, esteganografía y funciones hash suelen enseñarse como contenidos sueltos. Este
+      recurso los presenta como <strong>tres respuestas a un mismo problema</strong>: proteger la
+      información digital. La "Misión" (enviar un mensaje que no pueda leerse, ni descubrirse, ni
+      modificarse sin que se note) le da sentido a por qué existen las tres técnicas y por qué, en la
+      práctica, casi nunca se usa una sola.
+    </p>
+
+    <h2>Propósitos de aprendizaje</h2>
+    <ul>
+      <li>Diferenciar los problemas que resuelven la criptografía, la esteganografía y las funciones hash.</li>
+      <li>Aplicar cifrado simétrico simple (César y XOR) para transformar un mensaje con una clave.</li>
+      <li>Aplicar una técnica de esteganografía digital (ocultamiento en bits menos significativos) para ocultar un mensaje dentro de una imagen.</li>
+      <li>Calcular e interpretar una función hash (SHA-256) para verificar la integridad de un mensaje o archivo.</li>
+      <li>Relacionar estas tres técnicas con situaciones cotidianas de protección de la información digital (mensajería, compras en línea, descargas, actualizaciones).</li>
+    </ul>
+
+    <h2>Materiales y organización</h2>
+    <ul>
+      <li>Un dispositivo con navegador web actualizado por pareja o grupo de 3-4 estudiantes. El recurso funciona íntegramente en el navegador, sin instalar software.</li>
+      <li>Conexión a Internet para acceder al sitio (una vez cargada cada página, la mayoría de las herramientas funcionan sin conexión; la calculadora de hash requiere HTTPS, disponible automáticamente al publicar en GitHub Pages).</li>
+      <li>Proyector o pantalla para la <a href="presentacion.html">presentación</a> de apertura.</li>
+      <li>Para el Desafío final: al menos dos equipos que puedan intercambiar un archivo de imagen (por ejemplo, por correo, mensajería del centro o un pendrive).</li>
+    </ul>
+
+    <h2>Secuencia sugerida (4-5 clases de 45 minutos)</h2>
+    <p>
+      Con el video, las imágenes y las tres herramientas interactivas completas, el recurso ocupa más
+      tiempo del que parece a primera vista — sobre todo el Desafío final, que implica que los equipos
+      intercambien un archivo real entre sí. Esta es una planificación realista para no llegar apurados
+      a esa instancia, que es la que más aporta pedagógicamente:
+    </p>
+    <div style="overflow-x:auto;">
+    <table class="rubric">
+      <thead>
+        <tr><th>Clase</th><th>Contenido</th><th>Actividades</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Apertura de la misión + Etapa 1 (Criptografía)</td>
+          <td>Preguntas disparadoras y video inicial (slides 1-4 de la presentación), planteo de la
+          Misión, cifrado César y XOR, reto de fuerza bruta.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Etapa 2 (Esteganografía)</td>
+          <td>Video LSB, concepto de ocultamiento en píxeles, ocultar y revelar mensajes en imágenes
+          propias con la herramienta.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Etapa 3 (Funciones hash) + preparación del Desafío</td>
+          <td>Video de efecto avalancha, calculadora de hash, reto de verificación de integridad.
+          Formación de equipos y acuerdo presencial de la clave compartida para la clase siguiente.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Desafío final</td>
+          <td>Intercambio completo entre equipos: cifrar → ocultar → calcular hash de un lado; revelar →
+          descifrar → verificar del otro. Requiere tiempo para la logística de pasarse el archivo.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Reflexión y evaluación</td>
+          <td>Puesta en común de la reflexión final en equipo, cuestionario de autoevaluación individual,
+          cierre.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small">Si el grupo tiene buen manejo de archivos y avanza rápido, las clases 3 y 4 pueden
+    fusionarse en 4 clases totales. No se recomienda comprimir más: el Desafío final tiende a extenderse
+    la primera vez que un grupo lo hace.</p>
+
+    <h2>Orientaciones para la evaluación</h2>
+    <ul>
+      <li><strong>Formativa, durante las actividades:</strong> observar el proceso (cómo prueban, corrigen y argumentan sus decisiones), no solo si obtienen el resultado esperado.</li>
+      <li><strong>Autoevaluación:</strong> el cuestionario de 10 preguntas en la página de <a href="evaluacion.html">Evaluación</a> permite a cada estudiante chequear su propia comprensión conceptual.</li>
+      <li><strong>Rúbrica del Desafío final:</strong> ver tabla debajo, para evaluar el desempeño de cada equipo en las cuatro dimensiones técnicas más el trabajo colaborativo y la reflexión.</li>
+      <li><strong>Registro/bitácora:</strong> las respuestas de la reflexión final (en la página de Evaluación) pueden incorporarse al portafolio o carpeta de trabajo del estudiante.</li>
+    </ul>
+
+    <h3>Rúbrica para el Desafío final</h3>
+    <p>Instrumento sugerido para evaluar el desempeño de cada equipo durante el Desafío final. Se puede
+    ajustar los descriptores según el grupo.</p>
+    <div style="overflow-x:auto;">
+    <table class="rubric">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Logrado</th>
+          <th>En proceso</th>
+          <th>Inicial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Diferenciación conceptual</strong><br>Cifrar / ocultar / verificar integridad</td>
+          <td>Explica con sus palabras qué problema resuelve cada técnica y por qué no son intercambiables.</td>
+          <td>Identifica las tres técnicas pero confunde qué problema resuelve cada una.</td>
+          <td>Solo reconoce una de las tres técnicas o las nombra sin poder explicarlas.</td>
+        </tr>
+        <tr>
+          <td><strong>Criptografía</strong><br>Uso de la herramienta de cifrado</td>
+          <td>Cifra y descifra correctamente usando una clave acordada; explica por qué César es débil.</td>
+          <td>Logra cifrar/descifrar con ayuda; no logra explicar la debilidad del César.</td>
+          <td>No logra obtener un resultado correcto de cifrado/descifrado.</td>
+        </tr>
+        <tr>
+          <td><strong>Esteganografía</strong><br>Ocultar y revelar un mensaje</td>
+          <td>Oculta el mensaje en una imagen y el equipo receptor lo revela correctamente.</td>
+          <td>Logra ocultar o revelar, pero no ambos pasos de forma autónoma.</td>
+          <td>No logra completar el proceso de ocultamiento/revelado.</td>
+        </tr>
+        <tr>
+          <td><strong>Funciones hash</strong><br>Cálculo e interpretación</td>
+          <td>Calcula el hash correctamente y lo usa para confirmar o detectar una alteración del mensaje.</td>
+          <td>Calcula el hash pero necesita ayuda para interpretar la comparación.</td>
+          <td>No logra calcular o interpretar el hash.</td>
+        </tr>
+        <tr>
+          <td><strong>Trabajo en equipo</strong></td>
+          <td>Colabora activamente, acuerda la clave de forma segura y coordina los pasos con el otro equipo.</td>
+          <td>Participa, pero depende de otros compañeros para avanzar.</td>
+          <td>Participación mínima o desorganizada.</td>
+        </tr>
+        <tr>
+          <td><strong>Reflexión final</strong></td>
+          <td>Relaciona con claridad las tres técnicas con situaciones cotidianas concretas (apps, compras, descargas).</td>
+          <td>Menciona alguna situación cotidiana, sin relacionarla claramente con la técnica correspondiente.</td>
+          <td>No logra vincular lo aprendido con situaciones de la vida real.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>Inclusión y DUA</h2>
+    <ul>
+      <li>Si no hay dispositivos suficientes, la Etapa 2 incluye una alternativa "sin computadora" (mensaje oculto en la primera letra de cada palabra).</li>
+      <li>Las herramientas permiten repetir los intentos sin penalización, favoreciendo el ensayo-error como parte del aprendizaje.</li>
+      <li>El lenguaje evita jerga innecesaria; los conceptos técnicos (bit, hash, clave) se introducen con analogías cotidianas antes de nombrarlos formalmente.</li>
+      <li>La organización en equipos permite roles diferenciados (quien cifra, quien maneja la imagen, quien verifica) según fortalezas del grupo.</li>
+    </ul>
+
+    <h2>Posibles extensiones</h2>
+    <ul>
+      <li>Para grupos avanzados o 9° EBI: reemplazar las herramientas visuales por código real en Python (módulos <code>hashlib</code>, cifrado con librerías como <code>cryptography</code>), o generar y verificar hashes de archivos reales descargados.</li>
+      <li>Investigar por qué SHA-1 dejó de considerarse seguro y qué son las "colisiones" de hash.</li>
+      <li>Vincular con el marco legal ya visto en 7° EBI (Ley de protección de datos personales 18.331, AGESIC, URCDP): ¿qué obligaciones tiene una empresa que almacena información cifrada o con hash?</li>
+      <li>Explorar herramientas reales de esteganografía (por ejemplo OpenStego) y comparar su funcionamiento con la técnica LSB usada en este recurso.</li>
+    </ul>
+
+    <h2>Sobre la publicación de este recurso</h2>
+    <p>
+      El recurso está pensado para publicarse como sitio estático (por ejemplo, GitHub Pages): no
+      requiere servidor, base de datos ni instalación. Todo el procesamiento (cifrado, esteganografía,
+      cálculo de hash) ocurre en el navegador del o la estudiante; no se envía ningún dato a servidores
+      externos.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn secondary" href="recursos-docentes.html">← Sobre el recurso</a>
+      <a class="btn" href="presentacion.html">Ver presentación →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>Ciencias de la Computación · 8° EBI · ANEP</span>
+    <span>Licencia <a href="licencia.html">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const stored = localStorage.getItem('theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+})();
+function toggleTheme(){
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>
